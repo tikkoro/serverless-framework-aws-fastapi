@@ -1,0 +1,6 @@
+FROM public.ecr.aws/lambda/python:3.9
+COPY ./aws/requirements.txt ./
+COPY ./backend/app.py ./
+RUN pip install --no-cache-dir -r requirements.txt
+ENV STAGE=dev/
+

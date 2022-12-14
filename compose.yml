@@ -1,0 +1,10 @@
+services:
+    backend:
+        container_name: fastapi
+        build:
+            dockerfile: ./backend/Dockerfile
+            context: .
+        stdin_open: true
+        ports:
+            - "8001:8001"
+        tty: true
