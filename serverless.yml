@@ -2,13 +2,12 @@ service: fastapiLambda
 
 provider:
   name: aws
-  stage: ${opt:stage, self:custom.defaultStage}
   region: ap-northeast-1
   ecr:
     images:
       fastapi_lambda:
         path: ./
-        file: ${self:custom.environment.${self:provider.stage}}
+        file: ${param:dockerfile}
 
 functions:
   fastapi:
@@ -22,8 +21,8 @@ functions:
           integration: lambda-proxy
           cors: true
 
-custom:
-  defaultStage: dev
-  environment:
-    dev: ./aws/Dockerfile.dev
-    prod: ./aws/Dockerfile.prod
+params:
+  dev:
+    dockerfile: ./aws/Dockerfile.dev
+  prod:
+    dockerfile: ./aws/Dockerfile.prod
